@@ -47,7 +47,10 @@ class Solution:
                 begin = mid + 1
         return -1
 
-
+"""
+Time Complexity= O(Log n)
+Space Complexity= O(1)
+"""
 
 
 class Solution2:
