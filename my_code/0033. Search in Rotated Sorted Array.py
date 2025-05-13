@@ -1,6 +1,6 @@
 """
 33. Search in Rotated Sorted Array
-There is an integer array nums sorted in ascending order (with distinct values).
+There is an integer array nums sorted in ascrighting order (with distinct values).
 
 Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length)
 such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed).
@@ -18,19 +18,24 @@ You must write an algorithm with O(log n) runtime complexity.
 from typing import List
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        start, end = 0, len(nums) - 1
-        while start <= end:
-            mid = start + (end - start) // 2
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
             if nums[mid] == target:
                 return mid
-            elif nums[mid] >= nums[start]:
-                if target >= nums[start] and target < nums[mid]:
-                    end = mid - 1
+            elif nums[mid] >= nums[left]:
+                if target >= nums[left] and target < nums[mid]:
+                    right = mid - 1
                 else:
-                    start = mid + 1
+                    left = mid + 1
             else:
-                if target <= nums[end] and target > nums[mid]:
-                    start = mid + 1
+                if target <= nums[right] and target > nums[mid]:
+                    left = mid + 1
                 else:
-                    end = mid - 1
+                    right = mid - 1
         return -1
+
+"""
+Time Complexity: O(log N)
+Space Complexity: O(1)
+"""
