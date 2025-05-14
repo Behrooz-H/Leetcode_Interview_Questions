@@ -18,3 +18,19 @@ def next_largest_number_to_the_right(nums:List(int)):
 
 # Time O(N) for the loop
 # Space O(N) for the stack
+
+
+
+def nextGreaterElement(self, nums1, nums2):
+        stack = []
+        hashmap = {}
+
+        for num in nums2:
+            while stack and num > stack[-1]:
+                hashmap[stack.pop()] = num
+            stack.append(num)
+
+        while stack:
+            hashmap[stack.pop()] = -1
+
+        return [hashmap.get(i, -1) for i in nums1]
