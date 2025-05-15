@@ -20,40 +20,51 @@ merging them into one sorted list:
 
 from typing import Optional,List
 
+# Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 class Solution:
-    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        def merge_two_lists(l1, l2):
-            # maintain an unchanging reference to node ahead of the return node.
-            prehead= prev = ListNode(-1)
-            while l1 and l2:
-                if l1.val <= l2.val:
-                    prev.next = l1
-                    l1 = l1.next
-                else:
-                    prev.next = l2
-                    l2 = l2.next
-                prev = prev.next
-            # At least one of l1 and l2 can still have nodes at this point, so connect
-            # the non-null list to the end of the merged list.
-            prev.next = l1 if l1 is not None else l2
-            return prehead.next
-
+    def mergeKLists(
+        self, lists: List[Optional[ListNode]]
+    ) -> Optional[ListNode]:
+        amount = len(lists)
         interval = 1
-        while interval < len(lists):
-            for i in range(0, len(lists) - interval, interval * 2):
-                lists[i] = merge_two_lists(lists[i], lists[i + interval])
+        while interval < amount:
+            for i in range(0, amount - interval, interval * 2): # merge them two by two like a two linkedlist merge problem
+                lists[i] = self.merge2Lists(lists[i], lists[i + interval])
             interval *= 2
-        return lists[0] if lists else None
 
+        return lists[0] if amount > 0 else None
 
+    def merge2Lists(self, l1, l2):
+        head = point = ListNode(0)
+        while l1 and l2:
+            if l1.val <= l2.val:
+                point.next = l1
+                l1 = l1.next
+            else:
+                point.next = l2
+                l2 = l1
+                l1 = point.next.next
+            point = point.next
 
+        if not l1:
+            point.next = l2
+        else:
+            point.next = l1
 
+        return head.next
 
+"""
+Time complexity : O(Nlogk) where k is the number of linked lists.
+We can merge two sorted linked list in O(n) time where n is the total number of nodes in two lists.
+Sum up the merge process and we can get:O(Nlogk)
 
+Space complexity : O(1)
+We can merge two sorted linked lists in O(1) space.
+"""
 
 
 
