@@ -32,11 +32,11 @@ Output: true
 class Solution:
     def isValid(self, s: str) -> bool:
         stack=[]
-        dct={"]":"[","}":"{",")":"("}
+        dct={"[":"]","{":"}","(":")"}
         for char in s:
-            if char in dct.values():
-                stack.append(char)
-            elif not stack or dct[char]!=stack.pop():
+            if char in dct:
+                stack.append(dct[char])
+            elif not stack or char!=stack.pop():
                 return False
         return False if stack else True
 # Time = O(n)

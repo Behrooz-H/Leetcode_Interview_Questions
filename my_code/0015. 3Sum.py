@@ -13,20 +13,29 @@ from typing import List
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        res, dups, seen = set(),  set(), {}
+        res,  seen = set(),   {}
         for i, val1 in enumerate(nums):
-            if val1 not in dups:
-                dups.add(val1)
-                for j, val2 in enumerate(nums[i+1:]):
+            # if val1 not in dups:
+            #     dups.add(val1)
+                for  val2 in nums[i+1:]:
                     complement = -val1 - val2
-                    if complement in seen and seen[complement] == i:
+                    if complement in seen and seen[complement] == i: # if ithas been seen in the round for this round
                         res.add(sorted((val1, val2, complement)))
                     seen[val2] = i
         return list(res)
 
+"""
+Complexity Analysis
 
+Time Complexity: O(n^2). We have outer and inner loops, each going through n elements.
+While the asymptotic complexity is the same, this algorithm is noticeably slower than the previous approach. 
+Lookups in a hashset, though requiring a constant time, are expensive compared to the direct memory access.
+Space Complexity: O(n) for the hashset/hashmap.
+For the purpose of complexity analysis, we ignore the memory required for the output. However, in this approach we also store output in the hashset for deduplication. 
+In the worst case, there could be O(n^2) triplets in the output, 
+like for this example: [-k, -k + 1, ..., -1, 0, 1, ... k - 1, k]. Adding a new number to this sequence will produce n / 3 new triplets.
 
-
+"""
 
 # needing sort
 class Solution2:
@@ -51,3 +60,6 @@ class Solution2:
                     j += 1
             seen.add(nums[j])
             j += 1
+
+
+

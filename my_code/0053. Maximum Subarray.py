@@ -12,9 +12,6 @@ Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
 Output: 6
 Explanation: [4,-1,2,1] has the largest sum = 6.
 """
-# 3 Solutions
-
-
 # Divide and Conquer
 
 from typing import List
@@ -36,6 +33,14 @@ if __name__=="__main__":
     sol=Solution()
     print(sol.maxSubArray([1,2,3,4,-9,1,2,-3,8,9,10]))
 
+
+"""
+Time complexity: O(N), where N is the length of nums.
+We iterate through every element of nums exactly once.
+
+Space complexity: O(1)
+No matter how long the input is, we are only ever using 2 variables: currentSubarray and maxSubarray.
+"""
 
 
 # TIME: O(N^2)  and SPACE: O(1)

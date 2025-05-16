@@ -13,7 +13,6 @@ from typing import List
 # Time Complexity : O(K*N) N is list element and k is the length of the longest string
 # using the list of all chars and counting them instead of sorting the string will decrease the complexity
 
-
 class Solution:
     def groupAnagrams(self,strs):
         ans = collections.defaultdict(list)
@@ -23,6 +22,15 @@ class Solution:
                 count[ord(c) - ord('a')] += 1
             ans[tuple(count)].append(s)
         return ans.values()
+"""
+Time Complexity: O(NK), where N is the length of strs, and K is the maximum length of a string in strs. Counting each string is linear in the size of the string, and we count every string.
+Space Complexity: O(NK), the total information content stored in 
+"""
+
+
+
+
+
 
 
 # TIME Complexity: O (N*K*logK) because of the sort operation   where N is the length of strs, and K is the maximum length of a string in strs.
