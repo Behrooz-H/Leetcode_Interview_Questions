@@ -24,20 +24,20 @@ class Solution:
             j = len(nums) - 1
             while nums[j] <= nums[i]:
                 j -= 1
-            self.swap(nums, i, j)
-        self.reverse(nums, i + 1)
+            nums[i],nums[j] = nums[j], nums[i]
+        # self.reverse(nums, i + 1)
+        return nums[:i+1]+ list(reversed(nums[i+1:]))
+    # def reverse(self, nums, start):
+    #     i, j = start, len(nums) - 1
+    #     while i < j:
+    #         self.swap(nums, i, j)
+    #         i += 1
+    #         j -= 1
 
-    def reverse(self, nums, start):
-        i, j = start, len(nums) - 1
-        while i < j:
-            self.swap(nums, i, j)
-            i += 1
-            j -= 1
-
-    def swap(self, nums, i, j):
-        temp = nums[i]
-        nums[i] = nums[j]
-        nums[j] = temp
+    # def swap(self, nums, i, j):
+    #     temp = nums[i]
+    #     nums[i] = nums[j]
+    #     nums[j] = temp
         
 
 """ 
