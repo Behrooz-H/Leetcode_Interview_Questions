@@ -1,6 +1,7 @@
 """
 199. Binary Tree Right Side View
-Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+Given the root of a binary tree, imagine yourself standing on the right side of it, 
+return the values of the nodes you can see ordered from top to bottom.
 """
 
 # Definition for a binary tree node.
@@ -32,3 +33,9 @@ class Solution:
 
         dfs(root, 0)
         return self.res
+
+"""
+Time complexity: O(N) since one has to visit each node.
+Space complexity: O(H) to keep the recursion stack, where H is a tree height. 
+    The worst-case situation is a skewed tree when H=N.
+"""

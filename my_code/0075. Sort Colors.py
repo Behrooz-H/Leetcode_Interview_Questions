@@ -46,3 +46,8 @@ class Solution:
                 p2 -= 1
             else:
                 curr += 1
+
+
+"""Time complexity : O(N) since it's one pass along the array of length N.
+
+Space complexity : O(1) since it's a constant space solution."""

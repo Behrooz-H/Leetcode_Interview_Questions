@@ -52,3 +52,9 @@ if __name__ == '__main__':
     strn=".;"
     a=Solution()
     a.isPalindrome(strn)
+
+
+""" 
+Time complexity : O(n), in length n of the string. We traverse over each character at-most once, until the two pointers meet in the middle, or when we break and return early.
+Space complexity : O(1). No extra space required, at all.
+"""
