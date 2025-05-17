@@ -28,8 +28,63 @@ Explanation: An empty string is also valid.
 
 """
 
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+
+        def delete_invalid_closing(string, open_symbol, close_symbol):
+            sb = []
+            balance = 0
+            for c in string:
+                if c == open_symbol:
+                    balance += 1
+                if c == close_symbol:
+                    if balance == 0:
+                        continue
+                    balance -= 1
+                sb.append(c)
+            return "".join(sb)
+
+        # Note that s[::-1] gets the reverse of s.
+        s = delete_invalid_closing(s, "(", ")")
+        s = delete_invalid_closing(s[::-1], ")", "(")
+        return s[::-1]
+"""
+Time = O(N+N+N+N)= O(N)
+Space= O(N)
+
+            """
+    
+# __________________________________________________
+
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        indexes_to_remove = set()
+        stack = []
+        for i, c in enumerate(s):
+            if c not in "()":
+                continue
+            if c == "(":
+                stack.append(i)
+            elif not stack:
+                indexes_to_remove.add(i)
+            else:
+                stack.pop()
+        indexes_to_remove = indexes_to_remove.union(set(stack))
+        string_builder = []
+        for i, c in enumerate(s):
+            if i not in indexes_to_remove:
+                string_builder.append(c)
+        return "".join(string_builder)
+"""
+ Time= O(3.N) ==> O(N)  2 for loop+ 1join() =3N 
+ Space= O(~3.N)==>O(N)
+ """   
+    
+
+#_____________________________
 
 
+    
 
 # tWO paSS 
 class Solution:

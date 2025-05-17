@@ -36,6 +36,13 @@ class Solution:
         backtrack()
         return res
 
+
+"""
+Time complexity, what you should say in an interview: O(n⋅n!)
+Finding permutations is a well-studied problem in combinatorics. Given a set of length n, the number of permutations is n! (n factorial). There are n options for the first number, n−1 for the second, and so on.
+
+For each of the n! permutations, we need O(n) work to copy curr into the answer. This gives us O(n⋅n!) work."""
+
 if __name__=="__main__":
     sol=Solution()
     print(sol.permute([1,2,3,4]))
