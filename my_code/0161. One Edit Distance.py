@@ -27,7 +27,7 @@ class Solution:
 
         # Ensure that s is shorter than t.
         if ns > nt:
-            return self.isOneEditDistance(t, s)
+            return self.isOneEditDistance(t, s) #? it is important find the shortest as the firsst argument
 
         # The strings are NOT one edit away from distance
         # if the length diff is more than 1.
@@ -53,3 +53,4 @@ class Solution:
 """
 Time complexity: O(N) in the worst case when string lengths are close enough abs(ns - nt) <= 1, where N is a number of characters in the longest string. O(1) in the best case when abs(ns - nt) > 1.
 Space complexity: O(N) because strings are immutable in Python and Java and create substring costs O(N) space."""
+
