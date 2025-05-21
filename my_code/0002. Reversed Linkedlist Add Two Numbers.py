@@ -54,3 +54,4 @@ if __name__== "__main__":
         l=i.head
         while l :
             print(l.val)
+             

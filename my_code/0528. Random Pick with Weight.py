@@ -36,6 +36,6 @@ class Solution:
         return low
     
     """
-    Time: O(N) Construction of the prefix sum and o(log(n)) for the selection
+    Time: O(N) Construction of the prefix sum and o(log(n)) for the selection in Binary search
     Space: O(N) for sums array
     """

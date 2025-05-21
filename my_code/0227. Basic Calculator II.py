@@ -53,7 +53,41 @@ class Solution:
 
 """
 Time Complexity: O(n), where n is the length of the string s.
-
 Space Complexity: O(1), as we use constant extra space to store lastNumber, result and so on.
 """
 
+
+
+
+class Solution:
+    def calculate(self, s: str) -> int:
+        if not s:
+            return 0
+        
+        stack = []
+        current_number = 0
+        operation = '+'
+        s = s.strip()
+        
+        for i, char in enumerate(s):
+            if char.isdigit():
+                current_number = current_number * 10 + int(char)
+            if (not char.isdigit() and not char.isspace()) or i == len(s) - 1:
+                if operation == '+':
+                    stack.append(current_number)
+                elif operation == '-':
+                    stack.append(-current_number)
+                elif operation == '*':
+                    stack.append(stack.pop() * current_number)
+                elif operation == '/':
+                    prev = stack.pop()
+                    # Python division between integers may not truncate toward zero like Java
+                    stack.append(int(prev // current_number) if current_number!=0 else 0)
+                operation = char
+                current_number = 0
+        
+        return sum(stack)
+    
+"""
+Time Complexity: O(n), where n is the length of the string s. We iterate over the string s at most twice.
+Space Complexity: O(n), where n is the length of the string s."""

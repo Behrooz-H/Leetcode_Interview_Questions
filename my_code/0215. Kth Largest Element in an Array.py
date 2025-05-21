@@ -13,8 +13,21 @@ You must solve it in O(n) time complexity.
 
 #  select pivot or the last element of the array  check all other elements on the left and swap them with the
 #  pivot locator if they are small
-from typing import List
 
+#*TODO **** IMPORTANT NOTE 
+#! 1-First Approch One(1) is sorting and returning kth ->Olog(N) and O 
+
+#? 2-Second Approach TWO (2) is using and push all into MaxHeap and pop k times or more efficien is using Minheap to find Kth 
+# largest item. Easily push items into a min heap and monitor its size, if its size is more than k, remove its root, It
+# will keep the largest in its leafs and after traversing all elements, its root will be Kth smallest among all othrs wich are 
+# bigger, so root is the 
+
+# NOTE: 4- Fourth  Approach is  counting in a dictionary but instead of a dictionary use an array to save the Kth element in the array which is not zero
+
+
+
+#Third Approach  Quick selectlike quick sort    
+from typing import List
 
 class Solution:
     def partition(self, left, right, array):
@@ -43,6 +56,40 @@ class Solution:
         # nums=list(set(nums))
         return self.qq(0, len(nums) - 1, nums, k)
 
+# This solution is optimal 
+
+
+
+
+# _Fourth Approach_________________________________________
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        min_value = min(nums)
+        max_value = max(nums)
+        count = [0] * (max_value - min_value + 1)
+
+        for num in nums:
+            count[num - min_value] += 1
+        
+        remain = k
+        for num in range(len(count) -1, -1, -1):
+            remain -= count[num]
+            if remain <= 0:
+                return num + min_value
+
+        return -1
+# This solution is still occupying a large memory here  if distance between max_value and min_value is near large scale
+"""Time complexity: O(n+m)
+We first find maxValue and minValue, which costs O(n).
+Next, we initialize count, which costs O(m).
+Next, we populate count, which costs O(n).
+Finally, we iterate over the indices of count, which costs up to O(m).
+
+Space complexity: O(m). We create an array count with size O(m).  
+"""
+# _________________________________________________________
+
+    
 if __name__=="__main__":
     k=2
     arr = [78,2,98,3,46,90,6,2,13,50,1,37,58,4,10]

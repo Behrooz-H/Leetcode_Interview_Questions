@@ -7,35 +7,79 @@ return the values of the nodes you can see ordered from top to bottom.
 # Definition for a binary tree node.
 from typing import List, Optional
 
-
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-
 class Solution:
-    res = []
+    def rightSideView(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return []
 
-    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        def dfs(node, level):
-            if not node:
-                return
-            else:
-                if len(self.res) == level:
-                    self.res.append(node.val)
-                    if node.right:
-                        dfs(node.right, level + 1)
-                    if node.left:
-                        dfs(node.left, level + 1)
-            return
+        rightside = []
 
-        dfs(root, 0)
-        return self.res
+        def helper(node: TreeNode, level: int) -> None:
+            if level == len(rightside):
+                rightside.append(node.val)
+            for child in [node.right, node.left]:
+                if child:
+                    helper(child, level + 1)
 
+        helper(root, 0)
+        return rightside
 """
 Time complexity: O(N) since one has to visit each node.
 Space complexity: O(H) to keep the recursion stack, where H is a tree height. 
     The worst-case situation is a skewed tree when H=N.
 """
+
+
+
+
+
+""" 
+Algorithm
+
+Initiate the list of the right side view rightside.
+
+Initiate the queue by adding a root.
+
+While the queue is not empty:
+
+Write down the length of the current level: levelLength = queue.size().
+
+Iterate over i from 0 to level_length - 1:
+
+Pop the current node from the queue: node = queue.poll().
+
+If i == levelLength - 1, then it's the last node in the current level, push it to rightsize list.
+
+Add first left and then right child node into the queue.
+
+Return rightside.
+"""
+class Solution:
+    def rightSideView(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return []
+
+        queue = deque(
+            [
+                root,
+            ]
+        )
+        rightside = []
+
+        while queue:
+            level_length = len(queue)
+
+            for i in range(level_length):
+                node = queue.popleft()
+
+                # if it's the rightmost element
+                if i == level_length - 1:
+                    rightside.append(node.val)
+
+                # add child nodes in the queue
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+
+        return rightside

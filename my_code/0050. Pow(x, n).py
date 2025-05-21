@@ -22,13 +22,16 @@ class Solution:
             i//=2
             current_product = current_product * current_product
         return ans
+# Time O(N)
+# Space O(1)
+
 
 
 
 
 
 # Time O(LOG N)
-# SPACE = O(LOG N)
+# SPACE = O(logN)
 class Second_Solution:
     def myPow(self, x: float, n: int) -> float:
         if n==0:
