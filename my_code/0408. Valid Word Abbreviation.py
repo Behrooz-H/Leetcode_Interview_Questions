@@ -20,10 +20,28 @@ Given a string word and an abbreviation abbr, return whether the string matches 
 
 A substring is a contiguous non-empty sequence of characters within a string.    
     """
-    
+ 
+ 
+ 
+class Solution:
+    def validWordAbbreviation(self, word: str, abbr: str) -> bool:
+        i, j = 0, 0
+        while i < len(word) and j < len(abbr):
+            if word[i] == abbr[j]:
+                i += 1
+                j += 1
+            elif abbr[j].isdigit() and abbr[j] != '0':
+                num = 0
+                while j < len(abbr) and abbr[j].isdigit():
+                    num = num * 10 + int(abbr[j])
+                    j += 1
+                i += num
+            else:
+                return False
+        return True if i == len(word) and j == len(abbr) else False   
 
 
-class Solution(object):
+class Solution2(object):
     def validWordAbbreviation(self, word, abbr):
         """
         :type word: str
@@ -32,26 +50,32 @@ class Solution(object):
         """
         # check for the edge cases
 
+        # check for the edge cases
+        for c in word:
+            if c.isnumeric():
+                return False
+        # [?!@#$%^]
+
         i=j=0 # index for abbr array
+        cur_num=0
         while j<len(word) and i<len(abbr):  # O(N)
             print('j={j}, i={i}, word[j]={word[j]}, abbr[i]={abbr[i]}')
-            if abbr[i].isalpha(): 
-                if word[j]!=abbr[i] :
-                    return False    
+            if abbr[i].isnumeric(): 
+                if cur_num == 0 and abbr[i]=="0":
+                    return False 
+                cur_num= (cur_num * 10) + int(abbr[i])
+                i+=1
+            else:
+                j+=cur_num
+                cur_num=0
+                if j>len(word)-1 or  word[j]!=abbr[i]:
+                    return False   
                 elif word[j]==abbr[i]:
                         i+=1
                         j+=1
-            else:
-                if abbr[i]=="0":
-                    return False
-                num=[]
-                while i<len(abbr) and abbr[i].isnumeric():
-                    num.append(abbr[i])
-                    i+=1
-                step=int("".join(num))
-                print("step={step}")
-                j+=step
+        j+=cur_num
         return True if j== len(word) and  i== len(abbr) else False
+                
                 
 """
 Time=O(N)

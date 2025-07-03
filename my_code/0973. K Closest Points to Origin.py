@@ -52,7 +52,7 @@ class Solution:
     
     def squared_distance(self, point: List[int]) -> int:
         """Calculate and return the squared Euclidean distance."""
-        return point[0] ** 2 + point[1] ** 2
+        return (point[0] ** 2 + point[1] ** 2)**(0.5)
     
     """
 Time complexity: O(N).
