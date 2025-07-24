@@ -70,11 +70,11 @@ class Solution:
             else:
                 stack.pop()
         indexes_to_remove = indexes_to_remove.union(set(stack))
-        string_builder = []
+        string_builder = ""
         for i, c in enumerate(s):
             if i not in indexes_to_remove:
-                string_builder.append(c)
-        return "".join(string_builder)
+                string_builder+=c
+        return string_builder
 """
  Time= O(3.N) ==> O(N)  2 for loop+ 1join() =3N 
  Space= O(~3.N)==>O(N)
