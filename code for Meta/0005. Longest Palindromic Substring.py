@@ -2,6 +2,12 @@
 5. Longest Palindromic Substring
 Given a string s, return the longest palindromic substring in s.
 
+
+note A palindrome mirrors around its center.
+
+There are 2n - 1 possible centers in a string of length n (each character and each gap between characters).
+
+Expand around each center and track the maximum-length palindrome.
 """
 
 
